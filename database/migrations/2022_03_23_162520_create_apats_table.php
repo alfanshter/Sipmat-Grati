@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('schedule_apars', function (Blueprint $table) {
+        Schema::create('apats', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_apar');
-            $table->foreign('kode_apar')->references('kode')->on('apars')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('tw');
-            $table->string('tahun');
-            $table->date('tanggal_cek');
-            $table->integer('is_status')->default(0);
+            $table->string('kode')->unique();
+            $table->string('no_bak');
+            $table->string('lokasi');
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('schedule_apars');
+        Schema::dropIfExists('apats');
     }
 };

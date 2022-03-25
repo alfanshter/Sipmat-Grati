@@ -2,26 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ScheduleApar;
-use App\Http\Requests\StoreScheduleAparRequest;
-use App\Http\Requests\UpdateScheduleAparRequest;
+use App\Models\Apat;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
-class ScheduleAparController extends Controller
+class ApatController extends Controller
 {
-
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'kode_apar' => ['required'],
-            'tw' => ['required'],
-            'tahun' => ['required'],
-            'tahun' => ['required'],
-            'tanggal_cek' => ['required']
-                ]);
+            'kode' => ['required'],
+            'no_bak' => ['required'],
+            'lokasi' => ['required']
+        ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -29,7 +24,7 @@ class ScheduleAparController extends Controller
 
         try {
             $data = $request->all();
-            $post = ScheduleApar::create($data);
+            $post = Apat::create($data);
             $response = [
                 'message' => 'Post apar berhasil',
                 'sukses' => 1,

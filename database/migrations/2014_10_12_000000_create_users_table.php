@@ -11,12 +11,17 @@ return new class extends Migration
      *
      * @return void
      */
+
+    // role 0 = admin
+    // role 1 = petugas
+
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('username')->unique();
+            $table->string('token_id')->nullable();
             $table->integer('role')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

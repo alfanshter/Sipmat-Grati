@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AparController;
+use App\Http\Controllers\ApatController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ScheduleAparController;
 use App\Models\ScheduleApar;
@@ -23,16 +24,28 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 
+Route::get('/getusers/{role?}', [AuthController::class, 'getusers']);
+
+
+
 //Protecting Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/profile', function(Request $request) {
         return auth()->user();
     });
 
-    // API route for logout user
-    Route::post('/logout', [AuthController::class, 'logout']);
-    //APAR
-    Route::post('/apar', [AparController::class, 'store']);
-    //Schedule
-    Route::post('/schedule_apar', [ScheduleAparController::class, 'store']);
+ 
 });
+
+   // API route for logout user
+   Route::post('/logout', [AuthController::class, 'logout']);
+   //APAR
+   Route::post('/apar', [AparController::class, 'store']);
+   Route::get('/apar', [AparController::class, 'index']);
+   Route::post('/deleteapar', [AparController::class, 'deleteapar']);
+   Route::post('/updateapar', [AparController::class, 'updateapar']);
+   //Schedule
+   Route::post('/schedule_apar', [ScheduleAparController::class, 'store']);
+
+   //APAR
+   Route::post('/apat', [ApatController::class, 'store']);

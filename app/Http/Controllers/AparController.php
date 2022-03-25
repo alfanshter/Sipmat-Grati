@@ -7,6 +7,7 @@ use App\Http\Requests\StoreAparRequest;
 use App\Http\Requests\UpdateAparRequest;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -52,6 +53,59 @@ class AparController extends Controller
             return response()->json($response, Response::HTTP_OK);
         }
 
+
+    }
+
+    public function updateapar(Request $request)
+    {
+
+        $validator = Validator::make($request->all(),[
+            'kode' => ['required'],
+            'id' => ['required'],
+            'jenis' => ['required'],
+            'lokasi' => ['required'],
+            'tgl_pengisian' => ['required']
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        $data = $request->all();
+        $time = strtotime($request->tgl_pengisian);
+        $tgl_sekarang = date('Y-m-d',$time);
+        $tgl_kadaluarsa= date('Y-m-d', strtotime($tgl_sekarang. '+3 years'));
+
+        $data['tgl_kadaluarsa'] = $tgl_kadaluarsa;
+
+        $edit = DB::table('apars')->where('id',$request->id)->update($data);
+        $response = [
+            'message' => 'Post apar berhasil',
+            'sukses' => 1,
+            'data' =>null
+        ];
+
+        return response()->json($response, Response::HTTP_CREATED);
+    }
+    public function index()
+    {
+        $data= Apar::all();
+        $response = [
+            'message' => 'Post apar berhasil',
+            'data' =>$data
+        ];
+        return response()->json($response, Response::HTTP_OK);
+
+    }
+
+    public function deleteapar(Request $request)
+    {
+        DB::table('apars')->where('id',$request->id)->delete();
+        $response = [
+            'message' => 'celete apar berhasil',
+            'sukses' => 1
+        ];
+        return response()->json($response, Response::HTTP_OK);
 
     }
 }
