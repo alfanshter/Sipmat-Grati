@@ -69,12 +69,23 @@ class AuthController extends Controller
         $user = User::where('username', $request['username'])->firstOrFail();
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        $response = [
-            'data' => $user,
-            'access_token' =>$token,
-            'token_type' =>'Bearer',
-            'status' => 1
-        ];
+        if ($user->role ==0) {
+            $response = [
+                'data' => $user,
+                'access_token' =>$token,
+                'token_type' =>'Bearer',
+                'status' => 1
+            ];
+    
+        }else{
+            $response = [
+                'data' => $user,
+                'access_token' =>$token,
+                'token_type' =>'Bearer',
+                'status' => 2
+            ];
+    
+        }
 
         return response()->json($response,Response::HTTP_CREATED);
 

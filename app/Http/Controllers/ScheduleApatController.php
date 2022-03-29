@@ -2,22 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ScheduleApar;
-use App\Http\Requests\StoreScheduleAparRequest;
-use App\Http\Requests\UpdateScheduleAparRequest;
+use App\Models\ScheduleApat;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
-class ScheduleAparController extends Controller
+class ScheduleApatController extends Controller
 {
-
-    public function store(Request $request)
+    public function insert(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'kode_apar' => ['required'],
+            'kode_apat' => ['required'],
             'tw' => ['required'],
             'tahun' => ['required'],
             'tanggal_cek' => ['required']
@@ -29,7 +26,7 @@ class ScheduleAparController extends Controller
 
         try {
             $data = $request->all();
-            $post = ScheduleApar::create($data);
+            $post = ScheduleApat::create($data);
             $response = [
                 'message' => 'Post apar berhasil',
                 'sukses' => 1,
@@ -50,12 +47,12 @@ class ScheduleAparController extends Controller
 
 
     }
-    
+
     public function getschedule(Request $request)
     {
-        $data = DB::table('schedule_apars')
-            ->select(['schedule_apars.*','apars.lokasi'])
-            ->join('apars','apars.kode','=','schedule_apars.kode_apar')
+        $data = DB::table('schedule_apats')
+            ->select(['schedule_apats.*','apats.lokasi'])
+            ->join('apats','apats.kode','=','schedule_apats.kode_apat')
             ->where('tw',$request->input('tw'))
             ->where('tahun',$request->input('tahun'))
             ->orderBy('tanggal_cek','desc')
@@ -70,11 +67,12 @@ class ScheduleAparController extends Controller
             
     }
 
+    // jika user sudah mensetujui
     public function gethasil(Request $request)
     {
-        $data = DB::table('schedule_apars')
-            ->select(['schedule_apars.*','apars.lokasi'])
-            ->join('apars','apars.kode','=','schedule_apars.kode_apar')
+        $data = DB::table('schedule_apats')
+            ->select(['schedule_apats.*','apats.lokasi'])
+            ->join('apats','apats.kode','=','schedule_apats.kode_apat')
             ->where('tw',$request->input('tw'))
             ->where('tahun',$request->input('tahun'))
             ->orderBy('tanggal_cek','desc')
@@ -106,7 +104,7 @@ class ScheduleAparController extends Controller
 
         $data = $request->all();
 
-        $edit = DB::table('schedule_apars')->where('id',$request->id)->update($data);
+        $edit = DB::table('schedule_apats')->where('id',$request->id)->update($data);
         $response = [
             'message' => 'Post apar berhasil',
             'sukses' => 1,
@@ -118,6 +116,7 @@ class ScheduleAparController extends Controller
         
         
     }
+
 
 
 }
