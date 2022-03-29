@@ -21,6 +21,19 @@ return new class extends Migration
             $table->string('tahun');
             $table->date('tanggal_cek');
             $table->integer('is_status')->default(0);
+            $table->string('shift')->nullable();
+            $table->string('kap')->nullable();
+            $table->integer('tabung')->nullable();
+            $table->integer('pin')->nullable();
+            $table->integer('segel')->nullable();
+            $table->integer('tuas')->nullable();
+            $table->integer('pressure')->nullable();
+            $table->integer('selang')->nullable();
+            $table->integer('nozzle')->nullable();
+            $table->integer('rambu')->nullable();
+            $table->integer('gantungan')->nullable();
+            $table->integer('houskeeping')->nullable();
+            $table->integer('keterangan_tambahan')->nullable();
             $table->timestamps();
         });
     }
