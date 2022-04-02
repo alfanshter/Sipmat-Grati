@@ -8,6 +8,7 @@ use App\Http\Controllers\KebisinganController;
 use App\Http\Controllers\ScheduleAparController;
 use App\Http\Controllers\ScheduleApatController;
 use App\Http\Controllers\ScheduleHydrantController;
+use App\Http\Controllers\ScheduleKebisinganController;
 use App\Models\ScheduleApar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -87,4 +88,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
    Route::post('/deletekebisingan', [KebisinganController::class, 'deletekebisingan']);
    Route::post('/updatekebisingan', [KebisinganController::class, 'updatekebisingan']);
 
+    //Schedule Kebisingan
+    Route::post('/schedule_kebisingan', [ScheduleKebisinganController::class, 'insert']);
+    Route::post('/update_schedule_kebisingan', [ScheduleKebisinganController::class, 'updateschedule']);
+    Route::get('/getschedule_kebisingan/{tw?&tahun?}', [ScheduleKebisinganController::class, 'getschedule']);
+    Route::get('/gethasil_kebisingan/{tw?&tahun?}', [ScheduleKebisinganController::class, 'gethasil']);
+ 
    
