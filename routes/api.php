@@ -5,6 +5,7 @@ use App\Http\Controllers\ApatController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HydrantController;
 use App\Http\Controllers\KebisinganController;
+use App\Http\Controllers\PencahayaanController;
 use App\Http\Controllers\ScheduleAparController;
 use App\Http\Controllers\ScheduleApatController;
 use App\Http\Controllers\ScheduleHydrantController;
@@ -94,4 +95,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getschedule_kebisingan/{tw?&tahun?}', [ScheduleKebisinganController::class, 'getschedule']);
     Route::get('/gethasil_kebisingan/{tw?&tahun?}', [ScheduleKebisinganController::class, 'gethasil']);
  
-   
+   //Pencahayaan
+   Route::post('/pencahayaan', [PencahayaanController::class, 'store']);
+   Route::get('/getpencahayaan', [PencahayaanController::class, 'getpencahayaan']);
+   Route::post('/deletepencahayaan', [PencahayaanController::class, 'deletepencahayaan']);
+   Route::post('/updatepencahayaan', [PencahayaanController::class, 'updatepencahayaan']);
