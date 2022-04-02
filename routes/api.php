@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HydrantController;
 use App\Http\Controllers\ScheduleAparController;
 use App\Http\Controllers\ScheduleApatController;
+use App\Http\Controllers\ScheduleHydrantController;
 use App\Models\ScheduleApar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -70,3 +71,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
    Route::get('/gethydrant', [HydrantController::class, 'gethydrant']);
    Route::post('/deletehydrant', [HydrantController::class, 'deletehydrant']);
    Route::post('/updatehydrant', [HydrantController::class, 'updatehydrant']);
+
+   
+    //Schedule Hydrant
+    Route::post('/schedule_hydrant', [ScheduleHydrantController::class, 'insert']);
+    Route::post('/update_schedule_hydrant', [ScheduleHydrantController::class, 'updateschedule']);
+    Route::get('/getschedule_hydrant/{tw?&tahun?}', [ScheduleHydrantController::class, 'getschedule']);
+    Route::get('/gethasil_hydrant/{tw?&tahun?}', [ScheduleHydrantController::class, 'gethasil']);
+ 
