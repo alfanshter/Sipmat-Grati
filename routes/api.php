@@ -51,24 +51,37 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
    Route::get('/apar', [AparController::class, 'index']);
    Route::post('/deleteapar', [AparController::class, 'deleteapar']);
    Route::post('/updateapar', [AparController::class, 'updateapar']);
+   Route::get('/cekapar/{kode?}', [AparController::class, 'cekapar']);
+   Route::get('/apar_kadaluarsa', [AparController::class, 'apar_kadaluarsa']);
+   Route::post('/apar_pdf', [AparController::class, 'apar_pdf']);
+   
    //Schedule
    Route::post('/schedule_apar', [ScheduleAparController::class, 'store']);
    Route::get('/getschedule/{tw?&tahun?}', [ScheduleAparController::class, 'getschedule']);
    Route::get('/gethasil/{tw?&tahun?}', [ScheduleAparController::class, 'gethasil']);
+   Route::get('/getschedule_pelaksana', [ScheduleAparController::class, 'getschedule_pelaksana']);
    Route::post('/update_schedule_apar', [ScheduleAparController::class, 'updateschedule']);
+   Route::post('/acc_apar', [ScheduleAparController::class, 'acc_apar']);
+   Route::post('/return_apar', [ScheduleAparController::class, 'return_apar']);
+   Route::post('/hapus_schedule_apar', [ScheduleAparController::class, 'hapus_schedule_apar']);
 
    //APAT
    Route::post('/apat', [ApatController::class, 'store']);
    Route::get('/getapat', [ApatController::class, 'getapat']);
    Route::post('/deleteapat', [ApatController::class, 'deleteapat']);
    Route::post('/updateapat', [ApatController::class, 'updateapat']);
+   Route::get('/cekapat/{kode?}', [ApatController::class, 'cekapat']);
 
     //Schedule APAT
    Route::post('/schedule_apat', [ScheduleApatController::class, 'insert']);
    Route::post('/update_schedule_apat', [ScheduleApatController::class, 'updateschedule']);
+   Route::post('/hapus_schedule_apat', [ScheduleApatController::class, 'hapus_schedule_apat']);
    Route::get('/getschedule_apat/{tw?&tahun?}', [ScheduleApatController::class, 'getschedule']);
    Route::get('/gethasil_apat/{tw?&tahun?}', [ScheduleApatController::class, 'gethasil']);
-
+   Route::get('/getschedule_pelaksana_apat', [ScheduleApatController::class, 'getschedule_pelaksana_apat']);
+   Route::post('/acc_apat', [ScheduleApatController::class, 'acc_apat']);
+   Route::post('/return_apat', [ScheduleApatController::class, 'return_apat']);
+   Route::post('/apat_pdf', [ScheduleApatController::class, 'apat_pdf']);
    
    //Hydrant
    Route::post('/hydrant', [HydrantController::class, 'store']);

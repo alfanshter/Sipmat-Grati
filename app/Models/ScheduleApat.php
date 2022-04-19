@@ -9,4 +9,14 @@ class ScheduleApat extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function apar()
+    {
+        return $this->belongsTo(Apat::class,'kode_apat','kode');
+    }
+
+    public function apat()
+    {
+        return $this->belongsTo(Apat::class,'kode_apat','kode');
+    }
 }

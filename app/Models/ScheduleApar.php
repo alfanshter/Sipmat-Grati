@@ -9,4 +9,9 @@ class ScheduleApar extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function apar()
+    {
+        return $this->hasOne(Apar::class,'kode','kode_apar');
+    }
 }

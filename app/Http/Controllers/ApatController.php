@@ -100,4 +100,17 @@ class ApatController extends Controller
         return response()->json($response, Response::HTTP_OK);
 
     }
+
+    //tambahan
+    //cek apar
+    public function cekapat(Request $request)
+    {
+        $data= Apat::where('kode',$request->input('kode'))->first();
+        $response = [
+            'message' => 'Post apar berhasil',
+            'data' =>$data
+        ];
+        return response()->json($response, Response::HTTP_OK);
+
+    }
 }

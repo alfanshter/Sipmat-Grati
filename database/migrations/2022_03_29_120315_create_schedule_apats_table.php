@@ -22,12 +22,12 @@ return new class extends Migration
             $table->date('tanggal_cek');
             $table->integer('is_status')->default(0);
             $table->string('shift')->nullable();
-            $table->integer('bak')->nullable();
-            $table->integer('pasir')->nullable();
-            $table->integer('karung')->nullable();
-            $table->integer('ember')->nullable();
-            $table->integer('sekop')->nullable();
-            $table->integer('gantungan')->nullable();
+            $table->string('bak')->nullable();
+            $table->string('pasir')->nullable();
+            $table->string('karung')->nullable();
+            $table->string('ember')->nullable();
+            $table->string('sekop')->nullable();
+            $table->string('gantungan')->nullable();
             $table->string('keterangan')->nullable();
             $table->timestamps();
 
