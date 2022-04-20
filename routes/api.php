@@ -93,9 +93,14 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //Schedule Hydrant
     Route::post('/schedule_hydrant', [ScheduleHydrantController::class, 'insert']);
     Route::post('/update_schedule_hydrant', [ScheduleHydrantController::class, 'updateschedule']);
+    Route::post('/hapus_schedule_hydrant', [ScheduleHydrantController::class, 'hapus_schedule_hydrant']);
     Route::get('/getschedule_hydrant/{tw?&tahun?}', [ScheduleHydrantController::class, 'getschedule']);
     Route::get('/gethasil_hydrant/{tw?&tahun?}', [ScheduleHydrantController::class, 'gethasil']);
- 
+    Route::get('/getschedule_pelaksana_hydrant', [ScheduleHydrantController::class, 'getschedule_pelaksana_hydrant']);
+    Route::post('/acc_hydrant', [ScheduleHydrantController::class, 'acc_hydrant']);
+   Route::post('/return_hydrant', [ScheduleHydrantController::class, 'return_hydrant']);
+   Route::post('/hydrant_pdf', [ScheduleHydrantController::class, 'hydrant_pdf']);
+
     
    //Kebisingan
    Route::post('/kebisingan', [KebisinganController::class, 'store']);
