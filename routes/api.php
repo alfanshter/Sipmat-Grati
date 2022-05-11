@@ -111,9 +111,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //Schedule Kebisingan
     Route::post('/schedule_kebisingan', [ScheduleKebisinganController::class, 'insert']);
     Route::post('/update_schedule_kebisingan', [ScheduleKebisinganController::class, 'updateschedule']);
+    Route::post('/hapus_schedule_kebisingan', [ScheduleKebisinganController::class, 'hapus_schedule']);
     Route::get('/getschedule_kebisingan/{tw?&tahun?}', [ScheduleKebisinganController::class, 'getschedule']);
     Route::get('/gethasil_kebisingan/{tw?&tahun?}', [ScheduleKebisinganController::class, 'gethasil']);
- 
+    Route::post('/acc_kebisingan', [ScheduleKebisinganController::class, 'acc_kebisingan']);
+    Route::post('/return_kebisingan', [ScheduleKebisinganController::class, 'return_kebisingan']);
+    Route::get('/getschedule_pelaksana_kebisingan', [ScheduleKebisinganController::class, 'getschedule_pelaksana_kebisingan']);
+
    //Pencahayaan
    Route::post('/pencahayaan', [PencahayaanController::class, 'store']);
    Route::get('/getpencahayaan', [PencahayaanController::class, 'getpencahayaan']);
@@ -125,4 +129,4 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/update_schedule_pencahayaan', [SchedulePencahayaanController::class, 'updateschedule']);
     Route::get('/getschedule_pencahayaan/{tw?&tahun?}', [SchedulePencahayaanController::class, 'getschedule']);
     Route::get('/gethasil_pencahayaan/{tw?&tahun?}', [SchedulePencahayaanController::class, 'gethasil']);
- 
+    

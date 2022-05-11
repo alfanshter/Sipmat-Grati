@@ -9,4 +9,9 @@ class ScheduleKebisingan extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function kebisingan()
+    {
+        return $this->belongsTo(Kebisingan::class,'kode_kebisingan','kode');
+    }
 }

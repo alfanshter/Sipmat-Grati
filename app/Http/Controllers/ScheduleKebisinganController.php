@@ -50,13 +50,12 @@ class ScheduleKebisinganController extends Controller
 
     public function getschedule(Request $request)
     {
-        $data = DB::table('schedule_kebisingans')
-            ->select(['schedule_kebisingans.*','kebisingans.lokasi'])
-            ->join('kebisingans','kebisingans.kode','=','schedule_kebisingans.kode_kebisingan')
-            ->where('tw',$request->input('tw'))
-            ->where('tahun',$request->input('tahun'))
-            ->orderBy('tanggal_cek','desc')
-            ->get();
+
+        $data = ScheduleKebisingan::where('tw',$request->input('tw'))
+        ->where('tahun',$request->input('tahun'))
+        ->with('kebisingan')
+        ->orderBy('tanggal_cek','desc')
+        ->get();
 
             $response = [
                 'message' => 'Post apar berhasil',
@@ -67,16 +66,27 @@ class ScheduleKebisinganController extends Controller
             
     }
 
+    public function hapus_schedule(Request $request)
+    {
+        $hapus = ScheduleKebisingan::where('id',$request->id)->delete();
+        $response = [
+            'message' => 'Post apar berhasil',
+            'sukses' => 1,
+            'data' =>null
+        ];
+
+        return response()->json($response, Response::HTTP_CREATED);
+    }
+
       // jika user sudah mensetujui
       public function gethasil(Request $request)
       {
-          $data = DB::table('schedule_kebisingans')
-              ->select(['schedule_kebisingans.*','kebisingans.lokasi'])
-              ->join('kebisingans','kebisingans.kode','=','schedule_kebisingans.kode_kebisingan')
-              ->where('tw',$request->input('tw'))
-              ->where('tahun',$request->input('tahun'))
-              ->orderBy('tanggal_cek','desc')
-              ->get();
+            $data = ScheduleKebisingan::where('tw',$request->input('tw'))
+            ->where('tahun',$request->input('tahun'))
+            ->with('kebisingan')
+            ->orderBy('tanggal_cek','desc')
+            ->get();
+
   
               $response = [
                   'message' => 'Post apar berhasil',
@@ -111,5 +121,74 @@ class ScheduleKebisinganController extends Controller
           
           
       }
+
+         //admin acc schedule
+         public function acc_kebisingan(Request $request)
+         {
+             $validator = Validator::make($request->all(),[
+                 'id' => ['required']
+                     ]);
+     
+             
+             if ($validator->fails()) {
+                 return response()->json($validator->errors(), Response::HTTP_UNPROCESSABLE_ENTITY);
+             }
+     
+             $update = ScheduleKebisingan::where('id', $request->id)
+                                 ->update(['is_status'=>2]);
+             
+             $response = [
+                 'message' => 'Update kebisingan berhasil',
+                 'sukses' => 1,
+                 'data' =>null
+             ];
+     
+             return response()->json($response, Response::HTTP_CREATED);
+     
+         }
+     
+          //admin return schedule
+          public function return_kebisingan(Request $request)
+          {
+              $validator = Validator::make($request->all(),[
+                  'id' => ['required']
+                      ]);
+      
+              
+              if ($validator->fails()) {
+                  return response()->json($validator->errors(), Response::HTTP_UNPROCESSABLE_ENTITY);
+              }
+      
+              $update = ScheduleKebisingan::where('id', $request->id)
+                                  ->update(['is_status'=>3]);
+              
+              $response = [
+                  'message' => 'Update apar berhasil',
+                  'sukses' => 1,
+                  'data' =>null
+              ];
+      
+              return response()->json($response, Response::HTTP_CREATED);
+      
+          }
+
+          public function getschedule_pelaksana_kebisingan()
+          {
+                  $data = ScheduleKebisingan::where('is_status',0)
+                                      ->orWhere('is_status',1)
+                                      ->orWhere('is_status',3)
+                                      ->with('kebisingan')
+                                      ->orderBy('tanggal_cek','desc')
+                                      ->get();
+                          
+                      $response = [
+                          'message' => 'Post apar berhasil',
+                          'data' =>$data
+                      ];
+          
+                      return response()->json($response, Response::HTTP_CREATED);            
+          }
+     
+    
 
 }
