@@ -25,10 +25,10 @@ return new class extends Migration
             $table->integer('lux1')->nullable();
             $table->integer('lux2')->nullable();
             $table->integer('lux3')->nullable();
-            $table->integer('luxrata2')->nullable();
+            $table->float('luxrata2')->nullable();
             $table->integer('nilai_minimum_lux')->nullable();
-            $table->integer('sumber_pencahayaan')->nullable();
-            $table->integer('keterangan')->nullable();
+            $table->string('sumber_pencahayaan')->nullable();
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }
