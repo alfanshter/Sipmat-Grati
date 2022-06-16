@@ -11,6 +11,7 @@ use App\Http\Controllers\ScheduleApatController;
 use App\Http\Controllers\ScheduleHydrantController;
 use App\Http\Controllers\ScheduleKebisinganController;
 use App\Http\Controllers\SchedulePencahayaanController;
+use App\Http\Controllers\SeaWaterController;
 use App\Models\ScheduleApar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -133,3 +134,13 @@ Route::post('/return_pencahayaan', [SchedulePencahayaanController::class, 'retur
 Route::post('/acc_pencahayaan', [SchedulePencahayaanController::class, 'acc_pencahayaan']);
 Route::post('/pencahayaan_pdf', [SchedulePencahayaanController::class, 'pencahayaan_pdf']);
 Route::get('/getschedule_pelaksana_pencahayaan', [SchedulePencahayaanController::class, 'getschedule_pelaksana_pencahayaan']);
+
+//SewaWater
+Route::post('/seawater', [SeaWaterController::class, 'insert_seawater']);
+Route::post('/update_seawater', [SeaWaterController::class, 'update_seawater']);
+Route::get('/seawater/{tw?&tahun>}', [SeaWaterController::class, 'get_seawater']);
+Route::post('/hapus_seawater', [SeaWaterController::class, 'hapus_seawater']);
+Route::get('/seawater_pelaksana', [SeaWaterController::class, 'seawater_pelaksana']);
+Route::post('/return_seawater', [SeaWaterController::class, 'return_seawater']);
+Route::post('/acc_seawater', [SeaWaterController::class, 'acc_seawater']);
+Route::post('/seawater_pdf', [SeaWaterController::class, 'seawater_pdf']);

@@ -52,17 +52,8 @@ class SchedulePencahayaanController extends Controller
 
         $data = SchedulePencahayaan::where('tw', $request->input('tw'))
             ->where('tahun', $request->input('tahun'))
-            ->with('pencahayaan')
             ->orderBy('tanggal_cek', 'desc')
             ->get();
-
-        //$data = DB::table('schedule_pencahayaans')
-        //    ->select(['schedule_pencahayaans.*','pencahayaans.lokasi'])
-        //    ->join('pencahayaans','pencahayaans.kode','=','schedule_pencahayaans.kode_pencahayaan')
-        //    ->where('tw',$request->input('tw'))
-        //    ->where('tahun',$request->input('tahun'))
-        //    ->orderBy('tanggal_cek','desc')
-        //    ->get();
 
         $response = [
             'message' => 'Post apar berhasil',
